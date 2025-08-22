@@ -4,11 +4,6 @@ A robust and user-friendly shell script to automate the installation and uninsta
 
 This script improves upon the manual installation process by providing error handling, dependency management, and a clean uninstall option.
 
-![Terminal Screenshot](https://user-images.githubusercontent.com/1826543/189493979-43105f5e-18e4-411a-85d0-99411d316109.png)
-*(Note: This is a placeholder image. You can create and add a screenshot of your script in action!)*
-
----
-
 ## Features
 
 -   ✅ **Install & Uninstall**: Easily install or completely uninstall the DisplayLink driver with a simple command.
