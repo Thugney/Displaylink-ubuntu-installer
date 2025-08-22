@@ -1,55 +1,105 @@
-DisplayLink Auto Installer for Ubuntu
-Simple automated script to install DisplayLink drivers on Ubuntu with minimal user interaction.
+# DisplayLink Driver Manager for Ubuntu
 
-git clone https://github.com/Thugney/Displaylink-ubuntu-installer.git
+A robust and user-friendly shell script to automate the installation and uninstallation of DisplayLink USB Graphics drivers on Ubuntu and its derivatives (like Pop!_OS, Linux Mint, etc.).
+
+This script improves upon the manual installation process by providing error handling, dependency management, and a clean uninstall option.
+
+![Terminal Screenshot](https://user-images.githubusercontent.com/1826543/189493979-43105f5e-18e4-411a-85d0-99411d316109.png)
+*(Note: This is a placeholder image. You can create and add a screenshot of your script in action!)*
+
+---
+
+## Features
+
+-   ✅ **Install & Uninstall**: Easily install or completely uninstall the DisplayLink driver with a simple command.
+-   ⚙️ **Automatic Dependency Handling**: Checks for and installs required packages like `dkms` and `unzip`.
+-   🛡️ **Robust & Safe**: The script exits immediately if any command fails (`set -e`) and uses secure temporary directories for downloads.
+-   📝 **Detailed Logging**: All actions are logged to `/var/log/displaylink-installer.log` for easy troubleshooting.
+-   🎨 **User-Friendly Output**: Color-coded terminal output makes it easy to follow the script's progress.
+-   ✨ **Automatic Cleanup**: Temporary files and directories are automatically removed after execution.
+
+## Prerequisites
+
+-   An Ubuntu-based Linux distribution (e.g., Ubuntu 20.04/22.04, Pop!_OS, Linux Mint).
+-   `sudo` or root privileges.
+-   An active internet connection to download the driver.
+
+## Usage
+
+You can either clone this repository or download the script directly.
+
+### 1. Get the Script
+
+**Option A: Clone the repository (recommended)**
+
+```sh
+git clone [https://github.com/Thugney/Displaylink-ubuntu-installer.git](https://github.com/Thugney/Displaylink-ubuntu-installer.git)
 cd Displaylink-ubuntu-installer
-chmod +x install-displaylink.sh
-./install-displaylink.sh
+```
 
-What it does
-✅ Detects Ubuntu version and DisplayLink devices
-✅ Installs required dependencies automatically (dkms, build-essential, headers)
-✅ Downloads and installs official DisplayLink drivers directly from Synaptics
-✅ Verifies installation and provides troubleshooting tips
-✅ Only asks if you want to reboot at the end
+**Option B: Download the script directly**
 
-Features
-🚀 Fully automated installation process
-🎨 Color-coded output for easy reading
-📝 Comprehensive logging to /tmp/displaylink-install.log
-🔍 Automatic device detection
-🧹 Cleanup of previous installation attempts
-⚡ Optimized for Ubuntu 20.04+ including development versions
+```sh
+wget [https://raw.githubusercontent.com/Thugney/Displaylink-ubuntu-installer/main/manage-displaylink.sh](https://raw.githubusercontent.com/Thugney/Displaylink-ubuntu-installer/main/manage-displaylink.sh)
+```
 
-Requirements
-Ubuntu 20.04+ (tested on 25.04)
-DisplayLink dock/adapter connected via USB (optional but recommended)
-Internet connection for driver download
-sudo privileges for installation
+### 2. Make the Script Executable
 
-After Installation
-Reboot when prompted (highly recommended)
-Connect monitors to your DisplayLink dock
-Displays should be detected automatically
+Before running the script, you need to give it execute permissions.
 
-Troubleshooting
-If monitors don't appear after reboot:
-sudo systemctl restart dlm
-xrandr --listmonitors
-xrandr --auto
-xrandr --setprovideroutputsource 1 0
+```sh
+chmod +x manage-displaylink.sh
+```
 
-Check service status:
-systemctl status dlm.service
+### 3. Run the Script
 
-Tested Devices
-Targus USB3 DV4K DOCK (ID 17e9:6008)
-Dell D6000 Universal Dock
-HP USB-C Docks
-Most DisplayLink-based adapters
+Run the script with `sudo` and choose one of the available options.
 
-Support
-This installer was created by Thugney
-Repository: https://github.com/Thugney/Displaylink-ubuntu-installer
-For driver issues, check official DisplayLink support:
-https://www.synaptics.com/products/displaylink-graphics/support
+#### To Install the Driver:
+
+This is the default action. The script will download the latest DisplayLink driver, install dependencies, and run the official installer.
+
+```sh
+sudo ./manage-displaylink.sh --install
+# Or simply:
+sudo ./manage-displaylink.sh
+```
+
+#### To Uninstall the Driver:
+
+This will run the official DisplayLink uninstaller to cleanly remove the driver and its components from your system.
+
+```sh
+sudo ./manage-displaylink.sh --uninstall
+```
+
+#### To Get Help:
+
+Displays the help message with all available options.
+
+```sh
+./manage-displaylink.sh --help
+```
+
+A system reboot is required after installation or uninstallation for the changes to take full effect.
+
+## Troubleshooting
+
+If you encounter any issues, the first place to look is the log file. It contains a detailed record of all the steps the script took, including any errors.
+
+You can view the log file with:
+```sh
+cat /var/log/displaylink-installer.log
+```
+Or follow it in real-time during execution:
+```sh
+tail -f /var/log/displaylink-installer.log
+```
+
+## Disclaimer
+
+This script is provided "as is". Always be cautious when running scripts that require root privileges. While this script is designed to be safe, you are responsible for any changes made to your system.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
