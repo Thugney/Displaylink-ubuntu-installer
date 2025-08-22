@@ -219,7 +219,6 @@ ask_reboot() {
         esac
     done
 }
-
 # Main function
 main() {
     echo
